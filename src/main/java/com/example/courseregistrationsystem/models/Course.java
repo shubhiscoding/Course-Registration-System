@@ -1,9 +1,6 @@
 package com.example.courseregistrationsystem.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +12,7 @@ import java.util.List;
 @Entity
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
     private String name;
     private String description;

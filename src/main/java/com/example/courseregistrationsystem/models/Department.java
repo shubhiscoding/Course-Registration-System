@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 public class Department {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
 
     private String name;
