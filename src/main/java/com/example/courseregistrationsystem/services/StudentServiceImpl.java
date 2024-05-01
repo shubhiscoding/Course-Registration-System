@@ -32,7 +32,9 @@ public class StudentServiceImpl implements StudentService {
         student.setName(studentRequestDto.getName());
         student.setEmail(studentRequestDto.getEmail());
         student.setStudentId(studentRequestDto.getStudentId());
-        return new StudentResponseDto(student);
+
+        Student student1 = studentRepository.save(student);
+        return new StudentResponseDto(student1);
     }
 
     @Override
@@ -66,7 +68,8 @@ public class StudentServiceImpl implements StudentService {
         if(student.isEmpty()){
             throw new StudentNotFoundException(studentRequestDto.getStudentId(),"Invalid Student id");
         }
-        return new StudentResponseDto(student.get());
+        Student student1 = studentRepository.save(student.get());
+        return new StudentResponseDto(student1);
     }
 
     @Override

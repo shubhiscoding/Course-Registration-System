@@ -23,23 +23,23 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Student GetStudentById(@PathVariable Long id) {
-        return null;
+    public StudentResponseDto GetStudentById(@PathVariable Long id) {
+        return studentService.GetStudentById(id);
     }
 
     @GetMapping("/course/{id}")
-    public List<Student> getStudentsByCourseId(@PathVariable("id") Long id) {
-        return null;
+    public List<StudentResponseDto> getStudentsByCourseId(@PathVariable("id") Long id) {
+        return studentService.getStudentsByCourseId(id);
     }
 
     @PutMapping
-    public Student UpdateStudent(@RequestBody Student student){
-        return null;
+    public StudentResponseDto UpdateStudent(@RequestBody StudentRequestDto student){
+        return studentService.UpdateStudent(student);
     }
 
     @DeleteMapping("/{id}")
     public void DeleteStudent(@PathVariable Long id) {
-        return;
+        studentService.DeleteStudent(id);
     }
 
 }
