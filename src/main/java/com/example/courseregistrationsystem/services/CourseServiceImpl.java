@@ -1,5 +1,8 @@
 package com.example.courseregistrationsystem.services;
 
+import com.example.courseregistrationsystem.exceptions.CourseNotFoundExeption;
+import com.example.courseregistrationsystem.exceptions.DepartmentNotFoundException;
+import com.example.courseregistrationsystem.exceptions.StudentNotFoundException;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Department;
 import com.example.courseregistrationsystem.models.Student;
@@ -26,7 +29,9 @@ public class CourseServiceImpl implements CourseService{
     public Course getCourseById(Long id) {
         Optional<Course> course = courseRepository.findById(id);
         if(course.isEmpty()){
-            //throw exception
+
+//            throw exception
+            throw new CourseNotFoundExeption(id,"Invalid Course Id");
         }
         return course.get();
     }
@@ -41,6 +46,7 @@ public class CourseServiceImpl implements CourseService{
         Optional<Department> department = departmentRepository.findById(id);
         if(department.isEmpty()){
             //throw exception
+            throw new DepartmentNotFoundException(id,"Invalid Department id");
         }
         return department.get().getCourses();
     }
@@ -50,6 +56,8 @@ public class CourseServiceImpl implements CourseService{
         Optional<Student> student = studentRepository.findById(id);
         if(student.isEmpty()){
             //throw exception
+            throw new StudentNotFoundException(id,"Invalid Student id");
+
         }
         return student.get().getCourses();
     }
@@ -64,6 +72,7 @@ public class CourseServiceImpl implements CourseService{
         Optional<Course> course1 = courseRepository.findById(course.getCourseId());
         if (course1.isEmpty()){
             //throw exception
+            throw new CourseNotFoundExeption(course.getCourseId(),"Invalid Course Id");
         }
         Course course2 = course1.get();
         course2.setDepartment(course.getDepartment());
@@ -79,6 +88,7 @@ public class CourseServiceImpl implements CourseService{
         Optional<Course> course = courseRepository.findById(id);
         if(course.isEmpty()){
             //throw exception
+            throw new CourseNotFoundExeption(id,"Invalid Course Id");
         }
         courseRepository.delete(course.get());
     }

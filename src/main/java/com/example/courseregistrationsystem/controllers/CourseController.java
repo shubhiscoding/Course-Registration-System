@@ -1,5 +1,6 @@
 package com.example.courseregistrationsystem.controllers;
 
+import com.example.courseregistrationsystem.exceptions.CourseNotFoundExeption;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Instructor;
 import com.example.courseregistrationsystem.models.Student;
@@ -11,8 +12,9 @@ import java.util.*;
 @RequestMapping("/courses/")
 public class CourseController {
     @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable("id") int id) {
+    public Course getCourseById(@PathVariable("id") Long id) {
         return null;
+
     }
     @GetMapping
     public List<Course> getAllCourses() {

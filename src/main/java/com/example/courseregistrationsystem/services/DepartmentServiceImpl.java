@@ -1,5 +1,6 @@
 package com.example.courseregistrationsystem.services;
 
+import com.example.courseregistrationsystem.exceptions.DepartmentNotFoundException;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Department;
 import com.example.courseregistrationsystem.repositories.DepartmentRepository;
@@ -19,6 +20,8 @@ public class DepartmentServiceImpl implements DepartmentService{
         Optional<Department> department = departmentRepository.findById(id);
         if(department.isEmpty()){
             //throw exception
+            throw new DepartmentNotFoundException(id,"Invalid Department id");
+
         }
         return department.get();
     }
@@ -33,6 +36,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         Optional<Department> department1 = departmentRepository.findById(department.getDepartmentId());
         if(department1.isEmpty()){
             //throw exception
+            throw new DepartmentNotFoundException(department.getDepartmentId(),"Invalid Department id");
         }
         department1.get().setName(department.getName());
         return department1.get();
