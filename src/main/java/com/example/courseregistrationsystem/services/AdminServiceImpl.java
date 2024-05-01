@@ -22,13 +22,15 @@ public class AdminServiceImpl implements AdminService{
         if(!admin.check()){
            throw new BadRequest("Send all the admin details");
         }
+        
         Admin adminEntity = new Admin();
         adminEntity.setAdmin_Email(admin.getAdmin_Email());
         adminEntity.setAdmin_UserName(admin.getAdmin_UserName());
         adminEntity.setAdmin_Password(admin.getAdmin_Password());
         adminEntity.setAdmin_FirstName(admin.getAdmin_FirstName());
         adminEntity.setAdmin_LastName(admin.getAdmin_LastName());
-        return new AdminResponseDto(adminEntity);
+        Admin admin1 = adminRepositry.save(adminEntity);
+        return new AdminResponseDto(admin1);
     }
 
     @Override
