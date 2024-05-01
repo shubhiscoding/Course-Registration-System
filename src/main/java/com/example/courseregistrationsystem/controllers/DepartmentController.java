@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/department")
 public class DepartmentController {
     @GetMapping("/{id}")
-    public Department getDepartment(@PathVariable int id) {
+    public Department getDepartment(@PathVariable Long id) {
         return null;
     }
 

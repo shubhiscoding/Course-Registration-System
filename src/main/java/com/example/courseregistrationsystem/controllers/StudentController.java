@@ -16,12 +16,12 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Student GetStudentById(@PathVariable int id) {
+    public Student GetStudentById(@PathVariable Long id) {
         return null;
     }
 
     @GetMapping("/course/{id}")
-    public List<Student> getStudentsByCourseId(@PathVariable("id") int id) {
+    public List<Student> getStudentsByCourseId(@PathVariable("id") Long id) {
         return null;
     }
 
@@ -31,7 +31,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public void DeleteStudent(@PathVariable int id) {
+    public void DeleteStudent(@PathVariable Long id) {
         return;
     }
 
