@@ -1,8 +1,5 @@
 package com.example.courseregistrationsystem.services;
 
-<<<<<<< HEAD
-public class InstructorServiceImpl {
-=======
 import com.example.courseregistrationsystem.dtos.InstructorRequestDto;
 import com.example.courseregistrationsystem.dtos.InstructorResponseDto;
 import com.example.courseregistrationsystem.exceptions.*;
@@ -137,5 +134,4 @@ public class InstructorServiceImpl implements InstructorService{
             throw new AdminNotFound(instructor.getAdminUsername(), "Wrong Password");
         }
     }
->>>>>>> 6d1d63bcbfe3efcbb6d09c06da87b618d9a7f890
 }
