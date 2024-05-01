@@ -1,6 +1,6 @@
 package com.example.courseregistrationsystem.controllers;
 
-import com.example.courseregistrationsystem.dtos.AdminDto;
+import com.example.courseregistrationsystem.dtos.AdminResponseDto;
 import com.example.courseregistrationsystem.models.Admin;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 public class AdminController {
     @PostMapping("/")
-    public AdminDto createAdmin(@RequestBody Admin admin) {
+    public AdminResponseDto createAdmin(@RequestBody Admin admin) {
         return null;
     }
 
     @PatchMapping("/")
-    public AdminDto updateAdmin(@RequestBody Admin admin) {
+    public AdminResponseDto updateAdmin(@RequestBody Admin admin) {
         return null;
     }
 
@@ -23,7 +23,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public AdminDto getAdmin(@PathVariable int id) {
+    public AdminResponseDto getAdmin(@PathVariable int id) {
         return null;
     }
 }
