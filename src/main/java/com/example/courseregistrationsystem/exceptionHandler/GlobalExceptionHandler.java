@@ -1,6 +1,7 @@
 package com.example.courseregistrationsystem.exceptionHandler;
 
 import com.example.courseregistrationsystem.dtos.ExceptionDto;
+import com.example.courseregistrationsystem.exceptions.BadRequest;
 import com.example.courseregistrationsystem.exceptions.CourseNotFoundExeption;
 import com.example.courseregistrationsystem.exceptions.DepartmentNotFoundException;
 import com.example.courseregistrationsystem.exceptions.StudentNotFoundException;
@@ -40,6 +41,14 @@ return responseEntity;
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage(" Exception is found");
         exceptionDto.setResolution("solve exception");
+        ResponseEntity<ExceptionDto> response = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
+        return response;
+    }
+    @ExceptionHandler(BadRequest.class)
+    public ResponseEntity<ExceptionDto> BadRequest(){
+        ExceptionDto exceptionDto = new ExceptionDto();
+        exceptionDto.setMessage(" Bad Request Exception");
+        exceptionDto.setResolution("Send all the data properly.");
         ResponseEntity<ExceptionDto> response = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
         return response;
     }

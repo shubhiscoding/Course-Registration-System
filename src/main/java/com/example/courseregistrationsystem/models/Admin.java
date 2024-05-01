@@ -2,11 +2,15 @@ package com.example.courseregistrationsystem.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class Admin {
     @Id
-    private int adminId;
+    private Long adminId;
     private String admin_UserName;
     private String admin_Password;
     private String admin_Email;
