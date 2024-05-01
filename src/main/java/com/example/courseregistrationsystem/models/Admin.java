@@ -12,8 +12,6 @@ import lombok.Setter;
 @Entity
 public class Admin {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adminId;
     private String admin_UserName;
     private String admin_Password;
     private String admin_Email;

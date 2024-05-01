@@ -24,7 +24,6 @@ public class AdminServiceImpl implements AdminService{
         }
         
         Admin adminEntity = new Admin();
-        adminEntity.setAdminId(admin.getAdminId());
         adminEntity.setAdmin_Email(admin.getAdmin_Email());
         adminEntity.setAdmin_UserName(admin.getAdmin_UserName());
         adminEntity.setAdmin_Password(admin.getAdmin_Password());
@@ -39,38 +38,42 @@ public class AdminServiceImpl implements AdminService{
         if(!admin.check()){
             throw new BadRequest("Send all the admin details");
         }
-        Optional<Admin> admin1 = adminRepository.findById(admin.getAdminId());
+        Optional<Admin> admin1 = adminRepository.findById(admin.getAdmin_UserName());
         if(admin1.isEmpty()){
-            throw new AdminNotFound(admin.getAdminId(), "Admin not found");
+            throw new AdminNotFound(admin.getAdmin_UserName(), "Admin not found");
         }
         Admin admin2 = admin1.get();
-        admin2.setAdmin_Email(admin.getAdmin_Email());
-        admin2.setAdmin_UserName(admin.getAdmin_UserName());
-        admin2.setAdmin_FirstName(admin.getAdmin_FirstName());
-        admin2.setAdmin_LastName(admin.getAdmin_LastName());
-        return new AdminResponseDto(admin2);
+        if(admin2.getAdmin_Password().equals(admin.getAdmin_Password())) {
+            admin2.setAdmin_Email(admin.getAdmin_Email());
+            admin2.setAdmin_UserName(admin.getAdmin_UserName());
+            admin2.setAdmin_FirstName(admin.getAdmin_FirstName());
+            admin2.setAdmin_LastName(admin.getAdmin_LastName());
+            return new AdminResponseDto(admin2);
+        }else{
+            throw new AdminNotFound(admin.getAdmin_UserName(), "Wrong Admin Password");
+        }
     }
 
     @Override
     public void deleteAdmin(AdminRequestDto admin) {
-        Optional<Admin> admin1 = adminRepository.findById(admin.getAdminId());
+        Optional<Admin> admin1 = adminRepository.findById(admin.getAdmin_UserName());
         if(admin1.isEmpty()){
-            throw new AdminNotFound(admin.getAdminId(), "Admin not found");
+            throw new AdminNotFound(admin.getAdmin_UserName(), "Admin not found");
         }
         Admin admin2 = admin1.get();
         if(admin2.getAdmin_UserName().equals(admin.getAdmin_UserName()) && admin2.getAdmin_Password().equals(admin.getAdmin_Password())){
-            adminRepository.deleteById(admin.getAdminId());
+            adminRepository.deleteById(admin.getAdmin_UserName());
         }else{
-            throw new AdminNotFound(admin.getAdminId(), "Wrong Admin Username or Password");
+            throw new AdminNotFound(admin.getAdmin_UserName(), "Wrong Admin Username or Password");
         }
-        adminRepository.deleteById(admin.getAdminId());
+        adminRepository.deleteById(admin.getAdmin_UserName());
     }
 
     @Override
-    public AdminResponseDto getAdmin(Long id) {
-        Optional<Admin> admin1 = adminRepository.findById(id);
+    public AdminResponseDto getAdmin(String username) {
+        Optional<Admin> admin1 = adminRepository.findById(username);
         if(admin1.isEmpty()){
-            throw new AdminNotFound(id, "Admin not found");
+            throw new AdminNotFound(username, "Admin not found");
         }
         return new AdminResponseDto(admin1.get());
     }

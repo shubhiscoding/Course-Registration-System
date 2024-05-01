@@ -1,5 +1,6 @@
 package com.example.courseregistrationsystem.controllers;
 
+import com.example.courseregistrationsystem.dtos.InstructorRequestDto;
 import com.example.courseregistrationsystem.models.Instructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,8 +37,8 @@ public class InstructorController {
         return null;
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteInstructor(@PathVariable Long id) {
+    @DeleteMapping("")
+    public void deleteInstructor(@RequestBody InstructorRequestDto instructor) {
         return;
     }
 }
