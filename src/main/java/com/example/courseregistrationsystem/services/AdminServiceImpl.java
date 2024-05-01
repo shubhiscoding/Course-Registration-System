@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService{
         adminEntity.setAdmin_Password(admin.getAdmin_Password());
         adminEntity.setAdmin_FirstName(admin.getAdmin_FirstName());
         adminEntity.setAdmin_LastName(admin.getAdmin_LastName());
-        Admin admin1 = adminRepositry.save(adminEntity);
+        Admin admin1 = adminRepository.save(adminEntity);
         return new AdminResponseDto(admin1);
     }
 
