@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/instructor")
 public class InstructorController {
     @GetMapping("/{id}")
-    public Instructor getInstructorById(@PathVariable int id) {
+    public Instructor getInstructorById(@PathVariable Long id) {
         return null;
     }
 
@@ -19,11 +19,11 @@ public class InstructorController {
     }
 
     @GetMapping("/courses/{id}")
-    public Instructor getInstructorByCourseId(@PathVariable int id) {
+    public Instructor getInstructorByCourseId(@PathVariable Long id) {
         return null;
     }
     @GetMapping("/department/{id}")
-    public Instructor getInstructorByDepartmentId(@PathVariable int id) {
+    public Instructor getInstructorByDepartmentId(@PathVariable Long id) {
         return null;
     }
     @PostMapping
@@ -37,7 +37,7 @@ public class InstructorController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteInstructor(@PathVariable int id) {
+    public void deleteInstructor(@PathVariable Long id) {
         return;
     }
 }
