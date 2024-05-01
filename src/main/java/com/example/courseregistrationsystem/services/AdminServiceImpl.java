@@ -24,6 +24,7 @@ public class AdminServiceImpl implements AdminService{
         }
         
         Admin adminEntity = new Admin();
+        adminEntity.setAdminId(admin.getAdminId());
         adminEntity.setAdmin_Email(admin.getAdmin_Email());
         adminEntity.setAdmin_UserName(admin.getAdmin_UserName());
         adminEntity.setAdmin_Password(admin.getAdmin_Password());
