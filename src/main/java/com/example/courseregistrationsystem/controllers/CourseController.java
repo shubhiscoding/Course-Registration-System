@@ -20,41 +20,54 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-//    public CourseResponseDto ConvertToDTO(Course course){
-//        CourseResponseDto courseResponseDto = new CourseResponseDto();
-//    }
-//
+
     @GetMapping("/{id}")
     public CourseResponseDto getCourseById(@PathVariable("id") Long id) {
-        return null;
+        Course course = courseService.getCourseById(id);
+        return new CourseResponseDto(course);
     }
 
     @GetMapping
     public List<CourseResponseDto> getAllCourses() {
-        return null;
+        List<CourseResponseDto> courseResponseDtos = new ArrayList<>();
+        List<Course> courses = courseService.getAllCourses();
+        for(Course course : courses){
+            courseResponseDtos.add(new CourseResponseDto(course));
+        }
+        return courseResponseDtos;
     }
 
     @GetMapping("/department/{id}")
     public List<CourseResponseDto> getCourseByDepartmentId(@PathVariable Long id) {
-        return null;
+        List<CourseResponseDto> courseResponseDtos = new ArrayList<>();
+        List<Course> courses = courseService.getCourseByDepartmentId(id);
+        for(Course course : courses){
+            courseResponseDtos.add(new CourseResponseDto(course));
+        }
+        return courseResponseDtos;
     }
 
     @GetMapping("/student/{id}")
     public List<CourseResponseDto> getCourseByStudentId(@PathVariable Long id) {
-        return null;
+        List<CourseResponseDto> courseResponseDtos = new ArrayList<>();
+        List<Course> courses = courseService.getCourseByStudentId(id);
+        for(Course course : courses){
+            courseResponseDtos.add(new CourseResponseDto(course));
+        }
+        return courseResponseDtos;
     }
 
     @PostMapping
     public CourseResponseDto addCourse(@RequestBody CourseRequestDto requestDto) {
-        return null;
+        return new CourseResponseDto(courseService.addCourse(requestDto));
     }
 
     @PutMapping
     public CourseResponseDto updateCourse(@RequestBody CourseRequestDto requestDto) {
-        return null;
+        return new CourseResponseDto(courseService.updateCourse(requestDto));
     }
     @DeleteMapping("/{id}")
     public void deleteCourse(@PathVariable("id") Long id) {
-        return;
+        courseService.deleteCourse(id);
     }
 }

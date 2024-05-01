@@ -1,5 +1,6 @@
 package com.example.courseregistrationsystem.services;
 
+import com.example.courseregistrationsystem.dtos.CourseRequestDto;
 import com.example.courseregistrationsystem.exceptions.CourseNotFoundExeption;
 import com.example.courseregistrationsystem.exceptions.DepartmentNotFoundException;
 import com.example.courseregistrationsystem.exceptions.StudentNotFoundException;
@@ -62,23 +63,30 @@ public class CourseServiceImpl implements CourseService{
         return student.get().getCourses();
     }
 
-    @Override
-    public Course addCourse(Course course) {
-        return courseRepository.save(course);
+    public Course convertDto(CourseRequestDto courseRequestDto){
+        Course course = new Course();
+        course.setName(courseRequestDto.getName());
+        course.setCredits(courseRequestDto.getCredits());
+        course.setDepartment(new Department());
+        course.getDepartment().setDepartmentId(courseRequestDto.getDepartmentId());
+        course.setDescription(courseRequestDto.getDescription());
+        return course;
     }
 
     @Override
-    public Course updateCourse(Course course) {
-        Optional<Course> course1 = courseRepository.findById(course.getCourseId());
+    public Course addCourse(CourseRequestDto requestDto) {
+        return courseRepository.save(convertDto(requestDto));
+    }
+
+    @Override
+    public Course updateCourse(CourseRequestDto requestDto) {
+        Optional<Course> course1 = courseRepository.findById(requestDto.getCourseId());
         if (course1.isEmpty()){
             //throw exception
-            throw new CourseNotFoundExeption(course.getCourseId(),"Invalid Course Id");
+            throw new CourseNotFoundExeption(requestDto.getCourseId(),"Invalid Course Id");
         }
-        Course course2 = course1.get();
-        course2.setDepartment(course.getDepartment());
-        course2.setDepartment(course.getDepartment());
-        course2.setName(course.getName());
-        course2.setCredits(course.getCredits());
+        Course course2 = convertDto(requestDto);
+        course2.setCourseId(requestDto.getCourseId());
 
         return courseRepository.save(course2);
     }
