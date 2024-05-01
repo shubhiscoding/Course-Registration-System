@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface StudentService {
-    StudentResponseDto AddStudent(@ModelAttribute("student") StudentRequestDto studentRequestDto);
+    StudentResponseDto AddStudent(@RequestBody StudentRequestDto studentRequestDto);
     StudentResponseDto GetStudentById(@PathVariable Long id);
     List<StudentResponseDto> getStudentsByCourseId(@PathVariable("id") Long id);
     StudentResponseDto UpdateStudent(@RequestBody StudentRequestDto studentRequestDto);

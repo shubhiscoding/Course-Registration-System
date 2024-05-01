@@ -10,6 +10,7 @@ import com.example.courseregistrationsystem.repositories.CourseRepository;
 import com.example.courseregistrationsystem.repositories.StudentRepository;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +18,14 @@ import java.util.List;
 import java.util.Optional;
 @Getter
 @Setter
+@Service
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     private CourseRepository courseRepository;
+    public StudentServiceImpl(StudentRepository studentRepositor, CourseRepository courseRepository){
+        this.courseRepository = courseRepository;
+        this.studentRepository = studentRepositor;
+    }
     @Override
     public StudentResponseDto AddStudent(StudentRequestDto studentRequestDto) {
         Student student = new Student();

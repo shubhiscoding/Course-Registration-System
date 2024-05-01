@@ -13,8 +13,8 @@ public class StudentRequestDto {
     private Long studentId;
     private String name;
     private String email;
-    private Date dateOfEnrollment;
-    private List<Course> courses;
+//    private Date dateOfEnrollment;
+//    private List<Course> courses;
     private String adminUsername;
     private String password;
 }

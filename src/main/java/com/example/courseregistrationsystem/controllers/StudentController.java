@@ -1,7 +1,11 @@
 package com.example.courseregistrationsystem.controllers;
 
+import com.example.courseregistrationsystem.dtos.StudentRequestDto;
+import com.example.courseregistrationsystem.dtos.StudentResponseDto;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Student;
+import com.example.courseregistrationsystem.services.StudentService;
+import com.example.courseregistrationsystem.services.StudentServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,10 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/students")
 public class StudentController {
+    private StudentService studentService;
+    public StudentController(StudentService studentService){
+        this.studentService = studentService;
+    }
     @PostMapping
-    public Student AddStudent(@ModelAttribute("student") Student student) {
-        System.out.println(student);
-        return null;
+    public StudentResponseDto AddStudent(@RequestBody StudentRequestDto student) {
+        return studentService.AddStudent(student);
     }
 
     @GetMapping("/{id}")
