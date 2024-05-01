@@ -10,4 +10,10 @@ public class DepartmentRequestDto {
     private String name;
     private String adminUsername;
     private String password;
+
+    public boolean check(){
+        return this.departmentId != null && this.departmentId > 0 &&
+                this.name != null && !this.name.isEmpty() &&
+                this.adminUsername != null && this.password != null;
+    }
 }

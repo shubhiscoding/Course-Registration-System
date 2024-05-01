@@ -2,9 +2,13 @@ package com.example.courseregistrationsystem.services;
 
 import com.example.courseregistrationsystem.dtos.DepartmentRequestDto;
 import com.example.courseregistrationsystem.dtos.DepartmentResponseDto;
+import com.example.courseregistrationsystem.exceptions.AdminNotFound;
+import com.example.courseregistrationsystem.exceptions.BadRequest;
 import com.example.courseregistrationsystem.exceptions.DepartmentNotFoundException;
+import com.example.courseregistrationsystem.models.Admin;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Department;
+import com.example.courseregistrationsystem.repositories.AdminRepository;
 import com.example.courseregistrationsystem.repositories.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +16,17 @@ import java.util.ArrayList;
 import java.util.Optional;
 @Service
 public class DepartmentServiceImpl implements DepartmentService{
+    private AdminRepository adminRepository;
     private DepartmentRepository departmentRepository;
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository){
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository,AdminRepository adminRepository){
         this.departmentRepository = departmentRepository;
+        this.adminRepository = adminRepository;
     }
 
     public Department convertDto(DepartmentRequestDto requestDto){
+        if(!requestDto.check()){
+            throw new BadRequest("Send All Department Details");
+        }
         Department department = new Department();
 //        department.setDepartmentId(requestDto.getDepartmentId());
         department.setName(department.getName());
@@ -40,9 +49,22 @@ public class DepartmentServiceImpl implements DepartmentService{
         return department.get();
     }
 
+    public boolean AdminCheck(String UserName, String password){
+        Optional<Admin> admin = adminRepository.findById(UserName);
+        if(admin.isEmpty()){
+            throw new AdminNotFound(admin.get().getAdmin_UserName(),"Invalid User Admin");
+        }
+        return !password.equals(admin.get().getAdmin_Password());
+    }
 
     @Override
     public Department addDepartment(DepartmentRequestDto requestDto) {
+        if(!requestDto.check()){
+            throw new BadRequest("Send All Department Details");
+        }
+        if(AdminCheck(requestDto.getAdminUsername(), requestDto.getPassword())){
+            throw new AdminNotFound(requestDto.getAdminUsername(), "Invalid User Password");
+        }
         Department department = new Department();
         department.setName(requestDto.getName());
         return departmentRepository.save(department);
@@ -50,6 +72,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Department updateDepartment(DepartmentRequestDto requestDto) {
+        if(!requestDto.check()){
+            throw new BadRequest("Send All Department Details");
+        }
+        if(AdminCheck(requestDto.getAdminUsername(), requestDto.getPassword())){
+            throw new AdminNotFound(requestDto.getAdminUsername(), "Invalid User Password");
+        }
         Optional<Department> department1 = departmentRepository.findById(requestDto.getDepartmentId());
         if(department1.isEmpty()){
             //throw exception
