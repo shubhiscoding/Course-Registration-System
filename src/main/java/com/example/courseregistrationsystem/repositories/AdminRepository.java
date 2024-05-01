@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Long> {
+public interface AdminRepository extends JpaRepository<Admin, String> {
     @Override
     Admin save(Admin admin);
 
     @Override
-    Optional<Admin> findById(Long Id);
+    Optional<Admin> findById(String Id);
 
     @Override
     List<Admin> findAll();

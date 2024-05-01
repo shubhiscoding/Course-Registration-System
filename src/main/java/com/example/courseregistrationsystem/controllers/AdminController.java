@@ -29,7 +29,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public AdminResponseDto getAdmin(@PathVariable Long id) {
-        return adminService.getAdmin(id);
+    public AdminResponseDto getAdmin(@PathVariable String username) {
+        return adminService.getAdmin(username);
     }
 }

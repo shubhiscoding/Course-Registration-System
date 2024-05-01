@@ -1,10 +1,8 @@
 package com.example.courseregistrationsystem.exceptionHandler;
 
 import com.example.courseregistrationsystem.dtos.ExceptionDto;
-import com.example.courseregistrationsystem.exceptions.BadRequest;
-import com.example.courseregistrationsystem.exceptions.CourseNotFoundExeption;
-import com.example.courseregistrationsystem.exceptions.DepartmentNotFoundException;
-import com.example.courseregistrationsystem.exceptions.StudentNotFoundException;
+import com.example.courseregistrationsystem.exceptions.AdminNotFound;
+import com.example.courseregistrationsystem.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +31,14 @@ return responseEntity;
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("Student Id" + studentNotFoundException.getId()+"is Invalid");
         exceptionDto.setResolution("Provide valid Course ic");
+        ResponseEntity<ExceptionDto> responseEntity = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
+        return responseEntity;
+    }
+    @ExceptionHandler(AdminNotFound.class)
+    public ResponseEntity<ExceptionDto> handleAdminNotFound(AdminNotFound AdminNotFound){
+        ExceptionDto exceptionDto = new ExceptionDto();
+        exceptionDto.setMessage("Admin username " + AdminNotFound.getId()+" or Password is Invalid");
+        exceptionDto.setResolution("Provide valid admin username or Password");
         ResponseEntity<ExceptionDto> responseEntity = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
         return responseEntity;
     }

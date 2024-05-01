@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class AdminResponseDto {
-    private Long adminId;
     private String admin_UserName;
     private String admin_Email;
     private String admin_FirstName;
@@ -20,7 +19,6 @@ public class AdminResponseDto {
         this.admin_FirstName = admin.getAdmin_FirstName();
         this.admin_LastName = admin.getAdmin_LastName();
         this.admin_UserName = admin.getAdmin_UserName();
-        this.adminId = admin.getAdminId();
     }
 }
 

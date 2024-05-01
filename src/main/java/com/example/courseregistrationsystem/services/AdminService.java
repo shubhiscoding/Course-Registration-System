@@ -12,5 +12,5 @@ public interface AdminService {
 
     public void deleteAdmin(@RequestBody AdminRequestDto admin);
 
-    public AdminResponseDto getAdmin(@PathVariable Long id);
+    public AdminResponseDto getAdmin(@PathVariable String username);
 }
