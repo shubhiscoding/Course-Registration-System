@@ -6,10 +6,11 @@ import com.example.courseregistrationsystem.models.Student;
 import com.example.courseregistrationsystem.repositories.CourseRepository;
 import com.example.courseregistrationsystem.repositories.DepartmentRepository;
 import com.example.courseregistrationsystem.repositories.StudentRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class CourseServiceImpl implements CourseService{
     private CourseRepository courseRepository;
     private DepartmentRepository departmentRepository;
