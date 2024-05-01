@@ -8,9 +8,10 @@ import com.example.courseregistrationsystem.models.Admin;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.repositories.AdminRepository;
 import org.apache.coyote.BadRequestException;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class AdminServiceImpl implements AdminService{
     private AdminRepository adminRepository;
     public AdminServiceImpl(AdminRepository adminRepository) {
