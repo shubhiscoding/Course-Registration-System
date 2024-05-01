@@ -1,7 +1,9 @@
 package com.example.courseregistrationsystem.controllers;
 
 import com.example.courseregistrationsystem.dtos.InstructorRequestDto;
+import com.example.courseregistrationsystem.dtos.InstructorResponseDto;
 import com.example.courseregistrationsystem.models.Instructor;
+import com.example.courseregistrationsystem.services.InstructorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,32 +11,37 @@ import java.util.List;
 @RestController
 @RequestMapping("/instructor")
 public class InstructorController {
+    private InstructorService instructorService;
+    public InstructorController(InstructorService instructorService){
+        this.instructorService = instructorService;
+    }
     @GetMapping("/{id}")
-    public Instructor getInstructorById(@PathVariable Long id) {
-        return null;
+    public InstructorResponseDto getInstructorById(@PathVariable Long id) {
+        return instructorService.getInstructorById(id);
     }
 
     @GetMapping
-    public List<Instructor> getAllInstructors() {
-        return null;
+    public List<InstructorResponseDto> getAllInstructors() {
+        return instructorService.getAllInstructors();
     }
 
     @GetMapping("/courses/{id}")
-    public Instructor getInstructorByCourseId(@PathVariable Long id) {
-        return null;
+    public InstructorResponseDto getInstructorByCourseId(@PathVariable Long id) {
+        return instructorService.getInstructorByCourseId(id);
     }
     @GetMapping("/department/{id}")
-    public Instructor getInstructorByDepartmentId(@PathVariable Long id) {
-        return null;
+    public List<InstructorResponseDto> getInstructorByDepartmentId(@PathVariable Long id) {
+        return instructorService.getInstructorByDepartmentId(id);
     }
+
     @PostMapping
-    public Instructor createInstructor(@RequestBody Instructor instructor) {
-        return null;
+    public InstructorResponseDto createInstructor(@RequestBody InstructorRequestDto instructor) {
+        return instructorService.createInstructor(instructor);
     }
 
     @PutMapping
-    public Instructor updateInstructor(@RequestBody Instructor instructor) {
-        return null;
+    public InstructorResponseDto updateInstructor(@RequestBody InstructorRequestDto instructor) {
+        return instructorService.updateInstructor(instructor);
     }
 
     @DeleteMapping("")

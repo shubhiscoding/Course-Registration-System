@@ -9,6 +9,7 @@ import com.example.courseregistrationsystem.services.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,17 @@ public class DepartmentController {
 
     @PostMapping("/")
     public DepartmentResponseDto addDepartment(@RequestBody DepartmentRequestDto requestDto) {
-        return null;
+        Department department = departmentService.addDepartment(requestDto);
+        DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
+        departmentResponseDto.setDepartmentId(department.getDepartmentId());
+        departmentResponseDto.setName(department.getName());
+        departmentResponseDto.setCourses(new ArrayList<>());
+        if(department.getCourses() != null){
+            for(Course course : department.getCourses()){
+                departmentResponseDto.getCourses().add(course);
+            }
+        }
+        return departmentResponseDto;
     }
 
     @PutMapping("/")

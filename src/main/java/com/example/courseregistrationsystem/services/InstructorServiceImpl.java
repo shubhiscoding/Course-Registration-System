@@ -87,6 +87,7 @@ public class InstructorServiceImpl implements InstructorService{
         inst.setDepartment(dpr.get());
         inst.setName(instructor.getName());
         inst.setTitle(instructor.getTitle());
+        InstructorRepository.save(inst);
         return new InstructorResponseDto(inst);
     }
 
