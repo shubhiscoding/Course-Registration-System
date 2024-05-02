@@ -38,6 +38,8 @@ public class InstructorServiceImpl implements InstructorService{
         if(instr.isEmpty()){
             throw new InstructorNotFound(id, "instructor not found");
         }
+
+        System.out.println("getInstructorById is called");
         return new InstructorResponseDto(instr.get());
     }
 
@@ -48,6 +50,8 @@ public class InstructorServiceImpl implements InstructorService{
         for(Instructor i : instr){
             instructorResponseDtos.add(new InstructorResponseDto(i));
         }
+
+        System.out.println("getAllInstructors is called");
         return instructorResponseDtos;
     }
 
@@ -57,6 +61,8 @@ public class InstructorServiceImpl implements InstructorService{
         if(course.isEmpty()){
             throw new CourseNotFoundExeption(id, "Course Not found");
         }
+
+        System.out.println("getInstructorByCourseId is called");
         return new InstructorResponseDto(course.get().getInstructor());
     }
 
@@ -71,6 +77,8 @@ public class InstructorServiceImpl implements InstructorService{
         for(Course i : course){
             list.add(getInstructorByCourseId(i.getCourseId()));
         }
+
+        System.out.println("getInstructorByDepartmentId is called");
         return list;
     }
 
@@ -88,6 +96,8 @@ public class InstructorServiceImpl implements InstructorService{
         inst.setName(instructor.getName());
         inst.setTitle(instructor.getTitle());
         InstructorRepository.save(inst);
+
+        System.out.println("createInstructor is called");
         return new InstructorResponseDto(inst);
     }
 
@@ -116,6 +126,8 @@ public class InstructorServiceImpl implements InstructorService{
         inst.setDepartment(dpr.get());
         inst.setName(instructor.getName());
         inst.setTitle(instructor.getTitle());
+
+        System.out.println("updateInstructor is called");
         return null;
     }
 
@@ -134,5 +146,7 @@ public class InstructorServiceImpl implements InstructorService{
         }else{
             throw new AdminNotFound(instructor.getAdminUsername(), "Wrong Password");
         }
+
+        System.out.println("deleteInstructor is called");
     }
 }

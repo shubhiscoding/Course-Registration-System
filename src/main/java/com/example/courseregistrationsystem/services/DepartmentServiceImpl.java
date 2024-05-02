@@ -46,6 +46,8 @@ public class DepartmentServiceImpl implements DepartmentService{
             throw new DepartmentNotFoundException(id,"Invalid Department id");
 
         }
+
+        System.out.println("getDepartment is called");
         return department.get();
     }
 
@@ -54,6 +56,8 @@ public class DepartmentServiceImpl implements DepartmentService{
         if(admin.isEmpty()){
             throw new AdminNotFound(admin.get().getAdmin_UserName(),"Invalid User Admin");
         }
+
+        System.out.println("AdminCheck is called");
         return !password.equals(admin.get().getAdmin_Password());
     }
 
@@ -67,6 +71,8 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
         Department department = new Department();
         department.setName(requestDto.getName());
+
+        System.out.println("addDepartment is called");
         return departmentRepository.save(department);
     }
 
@@ -84,6 +90,8 @@ public class DepartmentServiceImpl implements DepartmentService{
             throw new DepartmentNotFoundException(requestDto.getDepartmentId(),"Invalid Department id");
         }
         department1.get().setName(requestDto.getName());
+
+        System.out.println("updateDepartment is called");
         return department1.get();
     }
 

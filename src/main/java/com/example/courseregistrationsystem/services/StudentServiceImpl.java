@@ -34,6 +34,8 @@ public class StudentServiceImpl implements StudentService {
         student.setEmail(studentRequestDto.getEmail());
         student.setStudentId(studentRequestDto.getStudentId());
         Student student1 = studentRepository.save(student);
+
+        System.out.println("AddStudent is called");
         return new StudentResponseDto(student1);
     }
 
@@ -44,6 +46,7 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentNotFoundException(id,"Invalid student id");
         }
 
+        System.out.println("GetStudentById is called");
         return new StudentResponseDto(student1.get());
     }
 
@@ -58,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentNotFoundException(student.getStudentId(), "Student Not Found");
         }
         Student student1 = std.get();
-        if(student1.getCourses().isEmpty()){
+        if(!student1.getCourses().isEmpty()){
             student1.getCourses().add(course.get());
         }else{
             List<Course> list = new ArrayList<>();
@@ -66,6 +69,15 @@ public class StudentServiceImpl implements StudentService {
             student1.setCourses(list);
         }
         studentRepository.save(student1);
+        if(!course.get().getStudents().isEmpty()) {
+            course.get().getStudents().add(student1);
+        }else{
+            List<Student> list2 = new ArrayList<>();
+            list2.add(student1);
+            course.get().setStudents(list2);
+        }
+        courseRepository.save(course.get());
+        System.out.println("enrollstudent is called");
         return new StudentResponseDto(student1);
     }
 
@@ -81,6 +93,8 @@ public class StudentServiceImpl implements StudentService {
         for(Student student : course.get().getStudents()){
             studentResponseDtoList.add(new StudentResponseDto(student));
         }
+
+        System.out.println("getStudentsByCourseId is called");
         return studentResponseDtoList;
     }
 
@@ -94,6 +108,8 @@ public class StudentServiceImpl implements StudentService {
         student1.setEmail(studentRequestDto.getEmail());
         student1.setName(studentRequestDto.getName());
         studentRepository.save(student1);
+
+        System.out.println("UpdateStudent is called");
         return new StudentResponseDto(student1);
     }
 
@@ -104,5 +120,6 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentNotFoundException(id,"Invalid Student id");
         }
         studentRepository.delete(student.get());
+        System.out.println("DeleteStudent is called");
     }
 }

@@ -30,11 +30,14 @@ public class AdminServiceImpl implements AdminService{
         adminEntity.setAdmin_FirstName(admin.getAdmin_FirstName());
         adminEntity.setAdmin_LastName(admin.getAdmin_LastName());
         Admin admin1 = adminRepository.save(adminEntity);
+
+        System.out.println("createAdmin is called");
         return new AdminResponseDto(admin1);
     }
 
     @Override
     public AdminResponseDto updateAdmin(AdminRequestDto admin) {
+        System.out.println("updateAdmin is called");
         if(!admin.check()){
             throw new BadRequest("Send all the admin details");
         }
@@ -66,6 +69,7 @@ public class AdminServiceImpl implements AdminService{
         }else{
             throw new AdminNotFound(admin.getAdmin_UserName(), "Wrong Admin Username or Password");
         }
+        System.out.println("deleteAdmin is called");
         adminRepository.deleteById(admin.getAdmin_UserName());
     }
 
@@ -75,6 +79,7 @@ public class AdminServiceImpl implements AdminService{
         if(admin1.isEmpty()){
             throw new AdminNotFound(username, "Admin not found");
         }
+        System.out.println("getAdmin is called");
         return new AdminResponseDto(admin1.get());
     }
 }

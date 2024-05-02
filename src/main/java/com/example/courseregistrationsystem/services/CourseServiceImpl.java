@@ -12,6 +12,7 @@ import com.example.courseregistrationsystem.repositories.DepartmentRepository;
 import com.example.courseregistrationsystem.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -36,11 +37,14 @@ public class CourseServiceImpl implements CourseService{
 //            throw exception
             throw new CourseNotFoundExeption(id,"Invalid Course Id");
         }
+        System.out.println("getCourseById is called");
         return course.get();
     }
 
     @Override
     public List<Course> getAllCourses() {
+
+        System.out.println("getAllCourses is called");
         return courseRepository.findAll();
     }
 
@@ -51,6 +55,7 @@ public class CourseServiceImpl implements CourseService{
             //throw exception
             throw new DepartmentNotFoundException(id,"Invalid Department id");
         }
+        System.out.println("getCourseByDepartmentId is called");
         return department.get().getCourses();
     }
 
@@ -62,6 +67,7 @@ public class CourseServiceImpl implements CourseService{
             throw new StudentNotFoundException(id,"Invalid Student id");
 
         }
+        System.out.println("getCourseByStudentId is called");
         return student.get().getCourses();
     }
 
@@ -76,6 +82,8 @@ public class CourseServiceImpl implements CourseService{
         course.setDepartment(new Department());
         course.getDepartment().setDepartmentId(courseRequestDto.getDepartmentId());
         course.setDescription(courseRequestDto.getDescription());
+
+        System.out.println("convertDto is called");
         return course;
     }
     public boolean AdminCheck(String UserName, String password){
@@ -83,6 +91,8 @@ public class CourseServiceImpl implements CourseService{
         if(admin.isEmpty()){
             throw new AdminNotFound(admin.get().getAdmin_UserName(),"Invalid User Admin");
         }
+
+        System.out.println("AdminCheck is called");
         return !password.equals(admin.get().getAdmin_Password());
     }
     @Override
@@ -93,6 +103,8 @@ public class CourseServiceImpl implements CourseService{
         if(AdminCheck(requestDto.getAdminUsername(), requestDto.getPassword())){
             throw new AdminNotFound(requestDto.getAdminUsername(), "Invalid User Password");
         }
+
+        System.out.println("addCourse is called");
         return courseRepository.save(convertDto(requestDto));
     }
 
@@ -112,6 +124,7 @@ public class CourseServiceImpl implements CourseService{
         Course course2 = convertDto(requestDto);
         course2.setCourseId(requestDto.getCourseId());
 
+        System.out.println("updateCourse is called");
         return courseRepository.save(course2);
     }
 
@@ -122,6 +135,8 @@ public class CourseServiceImpl implements CourseService{
             //throw exception
             throw new CourseNotFoundExeption(id,"Invalid Course Id");
         }
+
+        System.out.println("deleteCourse is called");
         courseRepository.delete(course.get());
     }
 }
