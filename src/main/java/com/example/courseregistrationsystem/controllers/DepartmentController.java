@@ -22,10 +22,9 @@ public class DepartmentController {
     }
 
     @GetMapping("/{id}")
-    public DepartmentResponseDto getDepartment(@PathVariable Long id) {
+    public DepartmentResponseDto getDepartment(@PathVariable("id") Long id) {
         Department department = departmentService.getDepartment(id);
         return new DepartmentResponseDto(department);
-
     }
 
     @PostMapping("/")
