@@ -10,6 +10,7 @@ import com.example.courseregistrationsystem.repositories.AdminRepository;
 import com.example.courseregistrationsystem.repositories.CourseRepository;
 import com.example.courseregistrationsystem.repositories.DepartmentRepository;
 import com.example.courseregistrationsystem.repositories.StudentRepository;
+import com.example.courseregistrationsystem.strategies.AssignInstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLOutput;
@@ -105,6 +106,8 @@ public class CourseServiceImpl implements CourseService{
         }
 
         System.out.println("addCourse is called");
+        AssignInstructor assignInstructor = new AssignInstructor();
+        assignInstructor.Instructor(convertDto(requestDto));
         return courseRepository.save(convertDto(requestDto));
     }
 

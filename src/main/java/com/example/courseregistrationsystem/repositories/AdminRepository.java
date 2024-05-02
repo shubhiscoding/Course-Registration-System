@@ -1,6 +1,7 @@
 package com.example.courseregistrationsystem.repositories;
 
 import com.example.courseregistrationsystem.models.Admin;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
