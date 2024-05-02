@@ -1,9 +1,12 @@
 # Course-Registration-System
 
+# Class Diagram
+![2](https://github.com/shubhiscoding/Course-Registration-System/assets/146775311/03c1aad2-988f-4718-a135-b7e4804328ec)
+
+# Running The Project
+
 First step is to Clone the repo in your system and run the project.
 General Endpoint: http://localhost:8080
-It seems like you've provided the controller code for a Course Registration System in Spring Boot along with some API documentation. Your documentation describes the endpoints and their functionalities. Here's the documentation in a structured format:
-
 ## Admin Documentation
 
 ### Create Admin
