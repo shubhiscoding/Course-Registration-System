@@ -17,12 +17,15 @@ import java.util.List;
 public class DepartmentController {
     private DepartmentService departmentService;
     public DepartmentController(DepartmentService departmentService){
+
         this.departmentService = departmentService;
     }
 
     @GetMapping("/{id}")
     public DepartmentResponseDto getDepartment(@PathVariable Long id) {
-        return null;
+        Department department = departmentService.getDepartment(id);
+        return new DepartmentResponseDto(department);
+
     }
 
     @PostMapping("/")
@@ -34,7 +37,7 @@ public class DepartmentController {
         departmentResponseDto.setCourses(new ArrayList<>());
         if(department.getCourses() != null){
             for(Course course : department.getCourses()){
-                departmentResponseDto.getCourses().add(course);
+                departmentResponseDto.getCourses().add(course.getName());
             }
         }
         return departmentResponseDto;
@@ -42,12 +45,13 @@ public class DepartmentController {
 
     @PutMapping("/")
     public DepartmentResponseDto updateDepartment(@RequestBody DepartmentRequestDto requestDto) {
-        return null;
+
+        return new DepartmentResponseDto(departmentService.updateDepartment(requestDto));
     }
 
     @DeleteMapping("/")
-    public String deleteDepartment(@RequestBody Department department) {
-        return null;
-    }
+    public String deleteDepartment(@RequestBody DepartmentRequestDto departmentRequestDto) {
+        return departmentService.deleteDepartment(departmentRequestDto.getDepartmentId());
+}
 
 }
