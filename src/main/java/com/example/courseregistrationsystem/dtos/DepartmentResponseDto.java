@@ -19,8 +19,8 @@ public class DepartmentResponseDto {
     private String name;
     private List<String> courses;
     public DepartmentResponseDto(Department department) {
-        this.departmentId = departmentId;
-        this.name = name;
+        this.departmentId = department.getDepartmentId();
+        this.name = department.getName();
         this.courses = new ArrayList<>();
         if(department.getCourses()!=null){
             for(Course course : department.getCourses()){
