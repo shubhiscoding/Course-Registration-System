@@ -42,14 +42,14 @@ return responseEntity;
         ResponseEntity<ExceptionDto> responseEntity = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
         return responseEntity;
     }
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionDto> handleGeneralException(){
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage(" Exception is found");
-        exceptionDto.setResolution("solve exception");
-        ResponseEntity<ExceptionDto> response = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
-        return response;
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ExceptionDto> handleGeneralException(){
+//        ExceptionDto exceptionDto = new ExceptionDto();
+//        exceptionDto.setMessage(" Exception is found");
+//        exceptionDto.setResolution("solve exception");
+//        ResponseEntity<ExceptionDto> response = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
+//        return response;
+//    }
     @ExceptionHandler(BadRequest.class)
     public ResponseEntity<ExceptionDto> BadRequest(){
         ExceptionDto exceptionDto = new ExceptionDto();

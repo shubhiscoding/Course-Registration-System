@@ -18,17 +18,26 @@ public class StudentResponseDto {
     private String name;
     private String email;
 //    private Date dateOfEnrollment;
-//    private List<String> courses;
+    private List<String> courses;
 
     public StudentResponseDto(Student student) {
-        this.studentId = student.getStudentId();
-        this.name = student.getName();
-        this.email = student.getEmail();
+
+        if(student.getStudentId()!=null && student.getStudentId() > 0) {
+            this.studentId = student.getStudentId();
+        }
+        if(student.getName()!=null) {
+            this.name = student.getName();
+        }
+        if(student.getEmail()!=null) {
+            this.email = student.getEmail();
+        }
 //        this.dateOfEnrollment = student.getDateOfEnrollment();
-//        this.courses = new ArrayList<>();
-//        List<Course> temp = student.getCourses();
-//        for(int i=0;i<temp.size();i++){
-//            courses.add(temp.get(i).getName());
-//        }
+        this.courses = new ArrayList<>();
+        List<Course> temp = student.getCourses();
+        if(temp!=null && !temp.isEmpty() && temp.size()>0) {
+            for (int i = 0; i < temp.size(); i++) {
+                courses.add(temp.get(i).getName());
+            }
+        }
     }
 }

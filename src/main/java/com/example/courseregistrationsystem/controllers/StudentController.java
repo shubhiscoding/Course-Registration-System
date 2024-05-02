@@ -21,6 +21,10 @@ public class StudentController {
     public StudentResponseDto AddStudent(@RequestBody StudentRequestDto student) {
         return studentService.AddStudent(student);
     }
+    @PostMapping("/enroll")
+    public StudentResponseDto enrollstudent(@RequestBody StudentRequestDto student) {
+        return studentService.enrollstudent(student);
+    }
 
     @GetMapping("/{id}")
     public StudentResponseDto GetStudentById(@PathVariable Long id) {

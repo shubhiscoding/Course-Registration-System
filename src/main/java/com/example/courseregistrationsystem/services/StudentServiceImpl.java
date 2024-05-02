@@ -3,6 +3,7 @@ package com.example.courseregistrationsystem.services;
 import com.example.courseregistrationsystem.dtos.CourseResponseDto;
 import com.example.courseregistrationsystem.dtos.StudentRequestDto;
 import com.example.courseregistrationsystem.dtos.StudentResponseDto;
+import com.example.courseregistrationsystem.exceptions.CourseNotFoundExeption;
 import com.example.courseregistrationsystem.exceptions.StudentNotFoundException;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Student;
@@ -32,7 +33,6 @@ public class StudentServiceImpl implements StudentService {
         student.setName(studentRequestDto.getName());
         student.setEmail(studentRequestDto.getEmail());
         student.setStudentId(studentRequestDto.getStudentId());
-
         Student student1 = studentRepository.save(student);
         return new StudentResponseDto(student1);
     }
@@ -45,6 +45,28 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return new StudentResponseDto(student1.get());
+    }
+
+    @Override
+    public StudentResponseDto enrollstudent(StudentRequestDto student) {
+        Optional<Course> course = courseRepository.findById(student.getCourseId());
+        if(course.isEmpty()){
+            throw new CourseNotFoundExeption(student.getStudentId(), "Course not found");
+        }
+        Optional<Student> std = studentRepository.findById(student.getStudentId());
+        if(std.isEmpty()){
+            throw new StudentNotFoundException(student.getStudentId(), "Student Not Found");
+        }
+        Student student1 = std.get();
+        if(student1.getCourses().isEmpty()){
+            student1.getCourses().add(course.get());
+        }else{
+            List<Course> list = new ArrayList<>();
+            list.add(course.get());
+            student1.setCourses(list);
+        }
+        studentRepository.save(student1);
+        return new StudentResponseDto(student1);
     }
 
     @Override
@@ -68,7 +90,10 @@ public class StudentServiceImpl implements StudentService {
         if(student.isEmpty()){
             throw new StudentNotFoundException(studentRequestDto.getStudentId(),"Invalid Student id");
         }
-        Student student1 = studentRepository.save(student.get());
+        Student student1 = student.get();
+        student1.setEmail(studentRequestDto.getEmail());
+        student1.setName(studentRequestDto.getName());
+        studentRepository.save(student1);
         return new StudentResponseDto(student1);
     }
 

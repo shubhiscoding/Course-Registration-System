@@ -14,7 +14,7 @@ public class StudentRequestDto {
     private String name;
     private String email;
 //    private Date dateOfEnrollment;
-//    private List<Course> courses;
+    private Long courseId;
     private String adminUsername;
     private String password;
 }
