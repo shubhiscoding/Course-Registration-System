@@ -28,8 +28,8 @@ public class AdminController {
         adminService.deleteAdmin(admin);
     }
 
-    @GetMapping("/{id}")
-    public AdminResponseDto getAdmin(@PathVariable String username) {
+    @GetMapping("/{username}")
+    public AdminResponseDto getAdmin(@PathVariable("username") String username) {
         return adminService.getAdmin(username);
     }
 }
