@@ -4,6 +4,7 @@ import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Instructor;
 import com.example.courseregistrationsystem.repositories.InstructorRepository;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class AssignInstructor {
     }
     public void Instructor(Course course){
         List<Instructor> instructors = instructorRepository.findAll();
+        System.out.println(instructors);
         for(Instructor instructor : instructors){
             Long departmentId_Course = course.getDepartment().getDepartmentId();
             Long departmentId_Instructor = course.getDepartment().getDepartmentId();

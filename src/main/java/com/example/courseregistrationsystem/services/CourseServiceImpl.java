@@ -6,10 +6,7 @@ import com.example.courseregistrationsystem.models.Admin;
 import com.example.courseregistrationsystem.models.Course;
 import com.example.courseregistrationsystem.models.Department;
 import com.example.courseregistrationsystem.models.Student;
-import com.example.courseregistrationsystem.repositories.AdminRepository;
-import com.example.courseregistrationsystem.repositories.CourseRepository;
-import com.example.courseregistrationsystem.repositories.DepartmentRepository;
-import com.example.courseregistrationsystem.repositories.StudentRepository;
+import com.example.courseregistrationsystem.repositories.*;
 import com.example.courseregistrationsystem.strategies.AssignInstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +19,14 @@ public class CourseServiceImpl implements CourseService{
     private DepartmentRepository departmentRepository;
     private StudentRepository studentRepository;
     private AdminRepository adminRepository;
+    private InstructorRepository instructorRepository;
     public CourseServiceImpl(CourseRepository courseRepository, AdminRepository adminRepository,
-                             DepartmentRepository departmentRepository ,StudentRepository studentRepository){
+                             DepartmentRepository departmentRepository ,StudentRepository studentRepository, InstructorRepository instrepo){
         this.courseRepository = courseRepository;
         this.departmentRepository = departmentRepository;
         this.studentRepository = studentRepository;
         this.adminRepository = adminRepository;
+        this.instructorRepository = instrepo;
     }
 
     @Override
@@ -106,9 +105,10 @@ public class CourseServiceImpl implements CourseService{
         }
 
         System.out.println("addCourse is called");
-        AssignInstructor assignInstructor = new AssignInstructor();
-        assignInstructor.Instructor(convertDto(requestDto));
-        return courseRepository.save(convertDto(requestDto));
+        AssignInstructor assignInstructor = new AssignInstructor(instructorRepository);
+        Course course1 = convertDto(requestDto);
+        assignInstructor.Instructor(course1);
+        return courseRepository.save(course1);
     }
 
     @Override
