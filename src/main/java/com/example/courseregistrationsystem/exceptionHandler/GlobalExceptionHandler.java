@@ -22,7 +22,7 @@ return responseEntity;
     public ResponseEntity<ExceptionDto> handleDepartmentNotFoundException(DepartmentNotFoundException departmentNotFoundException){
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("Department Id" + departmentNotFoundException.getId()+"is Invalid");
-        exceptionDto.setResolution("Provide valid Course ic");
+        exceptionDto.setResolution("Provide valid Department id");
         ResponseEntity<ExceptionDto> responseEntity = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
         return responseEntity;
     }
@@ -30,7 +30,7 @@ return responseEntity;
     public ResponseEntity<ExceptionDto> handleStudentNotFoundException(StudentNotFoundException studentNotFoundException){
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("Student Id" + studentNotFoundException.getId()+"is Invalid");
-        exceptionDto.setResolution("Provide valid Course ic");
+        exceptionDto.setResolution("Provide valid Student id");
         ResponseEntity<ExceptionDto> responseEntity = new ResponseEntity<>(exceptionDto, HttpStatus.NOT_FOUND);
         return responseEntity;
     }
